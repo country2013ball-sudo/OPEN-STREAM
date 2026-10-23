@@ -1,0 +1,767 @@
+PROJECT: DRAMAHUB OPEN — OPEN-SOURCE ANDROID STREAMING PLATFORM
+
+1. YOUR ROLE
+
+Act as a senior full-stack software engineer, Android application architect, open-source maintainer, video-streaming engineer, security auditor, subscription-billing engineer, UI/UX designer, and GitHub policy compliance inspector.
+
+Build a real, production-oriented entertainment application called DramaHub Open.
+
+Do not build a static mockup, fake prototype, or presentation-only demo. Implement a functional application with real authentication, a database, a video playback system, subscription management, daily viewing limits, payment verification, administrative tools, automated tests, documentation, and a reproducible Android APK build.
+
+The application should help users discover and watch legally available dramas, short films, micro-dramas, web series, and other shows in one convenient interface.
+
+2. MAIN GOAL
+
+Create an open-source Android application that offers:
+
+• A unified catalog for authorized dramas and shows.
+• Support for content from Quick TV, Kuku TV, Story TV, and other providers only when the relevant provider permits the integration and the content is properly licensed.
+• Original dramas and videos that I own or have permission to distribute.
+• Automatic daily catalog updates.
+• Hindi, English, and other-language content metadata.
+• Subtitles and audio tracks when legally available.
+• A free daily viewing allowance.
+• Affordable Basic, Pro, Premium, and Ultra memberships.
+• Ad-free playback for paid subscribers when all required rights and player capabilities permit it.
+• A professional, mobile-first Android experience.
+• A transparent way for me to earn revenue from subscriptions.
+
+Important: Do not assume that any named provider offers a public streaming API. Verify the official documentation, integration permissions, and licensing requirements before implementing a provider adapter.
+
+If a provider does not authorize embedding, playback, or commercial integration, show its official title information and a button that opens the provider's official app or website. Do not extract, copy, rehost, download, decrypt, scrape, or rebroadcast its protected videos.
+
+3. NON-NEGOTIABLE LEGAL AND PLATFORM RULES
+
+The project must follow GitHub's Acceptable Use Policies, GitHub Codespaces terms, applicable copyright law, privacy requirements, and the terms of every integrated content provider.
+
+Official references:
+
+• GitHub Acceptable Use Policies: https://docs.github.com/en/site-policy/acceptable-use-policies/github-acceptable-use-policies
+• GitHub Codespaces terms: https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features
+• Quick TV Terms: https://www.quicktv.app/terms
+• Kuku official terms: https://kuku.app/terms/
+• Kuku TV-specific terms: https://kukutv.app/
+
+Implement the following safeguards:
+
+1. Never bypass premium subscriptions or authentication on third-party services.
+2. Never bypass DRM, encryption, geographic restrictions, or access controls.
+3. Never scrape protected streams or reverse-engineer private APIs.
+4. Never embed unofficial pirated streaming links or third-party APKs.
+5. Never advertise the app as providing free access to another company's premium catalog unless written authorization establishes that right.
+6. Never include copyrighted sample episodes without distribution permission.
+7. Use public-domain, appropriately licensed, self-created, or expressly authorized test media.
+8. Keep provider names and logos subject to trademark and branding requirements.
+9. Provide a copyright complaint and content-removal process.
+10. Do not include gratuitous violence, illegal content, or material that violates platform policies.
+11. Do not put passwords, API keys, payment secrets, signing keys, or private tokens into source code.
+12. Do not use GitHub Codespaces as a production server, commercial streaming host, CDN, or permanent backend. Use it for development and testing, and deploy the actual service on a suitable authorized hosting provider.
+
+If a requested integration is not legally or technically available, implement a clearly documented alternative instead of fabricating a working integration.
+
+4. REQUIRED TECHNOLOGY ARCHITECTURE
+
+Inspect the current ecosystem and choose stable, maintained technologies with compatible licenses.
+
+Suggested architecture:
+
+Android application
+
+• Kotlin.
+• Jetpack Compose.
+• Android Media3 ExoPlayer for authorized video playback.
+• Android Navigation Compose.
+• Retrofit or Ktor Client for API requests.
+• Kotlin Coroutines and Flow.
+• Secure token storage using appropriate Android security APIs.
+• Material 3 design system.
+
+Backend
+
+• TypeScript with NestJS or another well-maintained, typed backend framework.
+• REST API with OpenAPI documentation.
+• PostgreSQL database.
+• Prisma ORM or an equivalent maintained database layer.
+• Redis for rate limiting, caching, and temporary session data where necessary.
+• A background job system for catalog synchronization.
+• An authorized object-storage and video-delivery provider for content I own or am licensed to distribute.
+
+Administration
+
+• A responsive web dashboard using a maintained React framework.
+• Secure administrator authentication and role-based access.
+• Catalog, licensing, subscriptions, user management, and system-health screens.
+
+Deployment
+
+• Docker and Docker Compose for local development.
+• Production deployment configuration for an appropriate external hosting provider.
+• GitHub Actions for code checks, unit tests, integration tests, dependency audits, and Android build verification.
+• Document the cost and limitations of any paid external services.
+
+Do not introduce unnecessary microservices. Start with a modular monolith and separate workers only where justified.
+
+Verify current dependency versions and license compatibility before adding packages.
+
+5. ANDROID APPLICATION FEATURES
+
+Implement a polished interface with the following screens.
+
+A. Splash screen
+
+• Display the DramaHub Open brand.
+• Initialize app configuration.
+• Check authentication and membership status.
+• Load cached catalog data.
+• Display useful loading and error states.
+
+B. Home screen
+
+• Trending dramas.
+• Recently added episodes.
+• Continue watching.
+• Recommended shows.
+• Popular categories.
+• Language filters.
+• Provider filters.
+• Search and browsing history.
+• A clear membership indicator.
+
+Every displayed title must come from actual catalog data. Do not fill the production interface with invented availability claims.
+
+C. Search and discovery
+
+Allow users to search by:
+
+• Title.
+• Genre.
+• Language.
+• Provider.
+• Release year.
+• Cast or creator when authorized metadata is available.
+
+Provide sorting, pagination, filters, and useful empty states.
+
+D. Drama details
+
+Each title page should support:
+
+• Title and synopsis.
+• Poster and backdrop.
+• Language and genre.
+• Episode list.
+• Season information.
+• Release information.
+• Age rating where available.
+• Provider or rights-holder attribution.
+• Availability status.
+• Watchlist controls.
+• A watch button only when a lawful viewing destination is available.
+
+E. Video player
+
+Implement:
+
+• Portrait and landscape playback where supported.
+• Full-screen mode.
+• Playback speed.
+• Seeking.
+• Resume from the previous position.
+• Subtitle selection.
+• Audio-track selection when supported.
+• Next-episode navigation.
+• Network error recovery.
+• Playback-quality selection when supported.
+• Accessible controls.
+• Playback-session tracking.
+
+Only play streams from authorized sources. Use the provider's approved player or official external destination whenever its terms require it.
+
+F. Account and settings
+
+• Email authentication and/or supported secure sign-in methods.
+• Account profile.
+• Membership status.
+• Daily viewing usage.
+• Subscription history.
+• Restore purchases when applicable.
+• Cancellation instructions.
+• Privacy settings.
+• Data export and account deletion.
+• Contact and support information.
+
+6. DAILY FREE VIEWING LIMIT
+
+Every free account receives 60 minutes of authorized playback per calendar day, using the Asia/Kolkata timezone by default.
+
+Requirements:
+
+1. Show a visible daily usage meter, such as 23 of 60 minutes used.
+2. Calculate usage from server-validated playback sessions, not only from a local Android timer.
+3. Track actual playback time rather than time spent browsing.
+4. Pause counting when the video is paused, stopped, or no longer playing.
+5. Handle background playback consistently with the app's playback rules.
+6. Prevent simple clock changes, application reinstalls, or clearing local data from resetting the allowance.
+7. Handle multiple devices using one shared account allowance.
+8. Use server timestamps and idempotent session updates.
+9. Apply an explicit policy for midnight rollover and sessions that cross midnight.
+10. Warn users before they reach the limit.
+11. When the limit is reached, pause playback and display the available membership plans.
+12. Reset the allowance according to the documented calendar-day policy.
+13. Keep account-level usage records while minimizing the personal data stored.
+14. Do not falsely claim that a timer can perfectly verify playback if the selected external provider does not expose the necessary playback information.
+
+Use server-side entitlement checks and signed, short-lived playback-session tokens for media served by our own authorized streaming backend.
+
+External provider playback must respect that provider's own access controls and integration requirements.
+
+7. MEMBERSHIP PLANS AND DEFAULT PRICING
+
+Create a centrally configurable subscription catalog.
+
+Use these initial illustrative prices in Indian rupees. Make them editable from the administrator dashboard.
+
+Plan| Price per month| Daily viewing allowance| Main benefits
+Free| ₹0| 60 minutes| Authorized catalog, basic features
+Basic| ₹29| 2 hours| Ad-free eligible content, watchlist, resume playback
+Pro| ₹59| 4 hours| Basic benefits, higher quality where available, enhanced recommendations
+Premium| ₹99| 8 hours| Premium account features, multiple supported devices
+Ultra| ₹149| 12 hours| Highest configured allowance, supported high-quality playback, priority support
+
+These prices and limits are proposed defaults, not market research or guaranteed profitability. Make them configurable without modifying application code.
+
+Rules:
+
+• Paid plans must not claim unlimited viewing when they have a daily cap.
+• Clearly explain the daily reset time.
+• State that availability and maximum resolution depend on content rights, source quality, device compatibility, and bandwidth.
+• Do not promise simultaneous streams unless the configured plan supports them.
+• Show monthly price, renewal conditions, taxes where applicable, cancellation instructions, and applicable refund terms before payment.
+• Display the exact plan benefits before the user confirms a purchase.
+• Allow plan changes, renewals, expiration handling, and cancellation.
+• Do not charge a user without explicit consent.
+• Do not automatically activate a paid plan based on a payment screenshot.
+• Support payment failures, refunds, and verified webhook events.
+
+Implement a configurable entitlement system so the owner can change plan limits and prices safely.
+
+8. PAYMENTS AND MY MERCHANT DESTINATION
+
+My requested merchant/payment contact is:
+
+mardharithwik@ibl
+
+Treat this value as a private configuration value until its payment-provider format and ownership are verified.
+
+Important: Do not assume that this value is a valid UPI ID, payment gateway account, or merchant identifier. Validate it with the chosen payment provider.
+
+Payment experience
+
+Create a dedicated Plans and Checkout screen.
+
+The flow should be:
+
+1. User opens Plans.
+2. User compares Free, Basic, Pro, Premium, and Ultra.
+3. User selects a plan.
+4. The app displays the exact amount, billing period, and terms.
+5. The backend creates a pending order through a supported payment provider.
+6. The app opens the provider's official checkout interface or payment application.
+7. The user authorizes the payment.
+8. The backend verifies the signed webhook or independently checks the payment status through the provider's API.
+9. The membership is activated only after verified successful payment.
+10. The app refreshes entitlements and displays a receipt or transaction reference.
+
+Use an established payment gateway that supports the required Indian payment methods and merchant onboarding requirements. Select and document the integration after checking its current official documentation.
+
+If a UPI intent or deep link is supported, use only the verified merchant identifier and provider-approved payment format. Never fabricate a UPI URI or payment status.
+
+Hide the raw payment identifier
+
+• Never display the raw merchant identifier as ordinary text in the plans UI.
+• Display plan names, prices, payment methods, and a professional checkout button.
+• Send users to the verified payment provider's checkout page or payment application.
+• Do not hide mandatory payment disclosures, merchant identity information, or legally required receipt details.
+• Never expose secret API credentials in the Android application.
+• Store gateway secrets only in the backend's secret manager or environment configuration.
+• Verify webhook signatures and reject replayed events.
+• Use unique order IDs and idempotent payment processing.
+• Never trust the Android client to declare that a payment succeeded.
+• Provide a clear payment-failed and retry flow.
+• Provide a way to contact the merchant for billing disputes.
+
+If the merchant destination cannot be verified or is not accepted by the payment provider, leave live payments disabled and document the exact onboarding steps required. Do not simulate successful real payments.
+
+9. AD-FREE SUBSCRIPTIONS
+
+Paid membership should remove advertising controlled by DramaHub Open from eligible playback and app screens.
+
+Implement:
+
+• No third-party banner or interstitial advertisements for active paid subscribers.
+• No forced video advertisements inserted by our own platform for paid subscribers.
+• Clear membership status and server-controlled ad-entitlement checks.
+• No advertisements disguised as playback controls.
+• No claims that the app can remove advertisements served inside an external provider's official application or video player.
+
+If an external provider serves its own advertisements, disclose that limitation before the user purchases a plan that might otherwise be understood as completely ad-free.
+
+Do not remove, block, or modify advertisements required by a provider's authorized integration terms.
+
+10. DAILY AUTOMATIC CATALOG UPDATES
+
+Implement a genuine catalog synchronization service.
+
+Support multiple catalog adapters, such as:
+
+• An authorized provider API.
+• A provider-supplied feed.
+• A licensed content-management API.
+• An administrator-managed catalog.
+• An RSS or metadata feed only where its terms allow the intended use.
+
+Each adapter must have documented permissions, rate limits, authentication requirements, and failure handling.
+
+Requirements:
+
+1. Run scheduled catalog synchronization at least once per day when the production worker and scheduler are available.
+2. Allow manual synchronization from the administrator dashboard.
+3. Use incremental synchronization when supported.
+4. Deduplicate titles and episodes.
+5. Store source IDs and synchronization timestamps.
+6. Validate metadata before publishing it.
+7. Record synchronization errors and retry transient failures.
+8. Do not remove valid entries merely because a provider temporarily fails.
+9. Detect expired licenses and disable playback when rights expire.
+10. Update release information only from reliable, authorized sources.
+11. Use cache invalidation to make new catalog entries visible promptly.
+12. Show the last successful synchronization time.
+13. Provide a manual review queue for uncertain metadata.
+14. Do not scrape protected websites or automate access to restricted APIs.
+15. Do not promise that every new episode will appear immediately; availability depends on the source's update schedule and granted rights.
+
+11. CONTENT LICENSING AND ADMINISTRATION
+
+Build an admin dashboard with the following capabilities:
+
+• Add, edit, archive, and remove catalog entries.
+• Upload original or licensed videos.
+• Manage posters, thumbnails, subtitles, and audio tracks.
+• Create seasons and episodes.
+• Assign content categories and languages.
+• Record content owners and license details.
+• Record the allowed countries or regions.
+• Set license start and expiration dates.
+• Define whether each item is free, subscription-only, or externally linked.
+• Define the membership tiers permitted to access each item.
+• Manage provider adapters.
+• Review synchronization logs.
+• Review copyright complaints.
+• Disable disputed or expired content.
+• View subscription and payment summaries.
+• Review support requests.
+• Manage user roles and administrator permissions.
+
+Each playable content item must have an authorization record identifying its source and permitted use.
+
+Use least-privilege access control. Require stronger authentication for administrators and record security-sensitive administrative changes in an audit log.
+
+Do not allow an administrator to mark an unverified third-party stream as licensed without recording the basis of authorization.
+
+12. DATABASE DESIGN
+
+Design a normalized schema with appropriate foreign keys, indexes, uniqueness constraints, migrations, and timestamps.
+
+Include at least:
+
+• users
+• user_profiles
+• roles
+• sessions
+• providers
+• provider_integrations
+• catalog_titles
+• seasons
+• episodes
+• media_assets
+• subtitles
+• audio_tracks
+• licensing_records
+• catalog_sync_jobs
+• catalog_sync_logs
+• watchlists
+• playback_progress
+• playback_sessions
+• daily_usage
+• subscription_plans
+• subscriptions
+• entitlements
+• payment_orders
+• payment_events
+• refunds
+• webhook_idempotency_records
+• copyright_complaints
+• support_tickets
+• admin_audit_logs
+• app_configuration
+
+Store timestamps in UTC and apply the documented Asia/Kolkata daily allowance policy consistently.
+
+Use migrations, not manual production database changes.
+
+Do not store raw card details, payment passwords, UPI PINs, or unnecessary sensitive personal information.
+
+13. BACKEND API
+
+Implement documented, validated endpoints such as:
+
+Authentication:
+
+• POST /api/v1/auth/register
+• POST /api/v1/auth/login
+• POST /api/v1/auth/logout
+• POST /api/v1/auth/refresh
+• DELETE /api/v1/account
+
+Catalog:
+
+• GET /api/v1/catalog
+• GET /api/v1/catalog/:id
+• GET /api/v1/catalog/:id/episodes
+• GET /api/v1/search
+• GET /api/v1/providers
+
+Playback:
+
+• POST /api/v1/playback/sessions
+• POST /api/v1/playback/sessions/:id/heartbeat
+• POST /api/v1/playback/sessions/:id/stop
+• GET /api/v1/playback/entitlement
+
+Membership:
+
+• GET /api/v1/plans
+• GET /api/v1/subscription
+• POST /api/v1/checkout
+• POST /api/v1/subscription/cancel
+• POST /api/v1/subscription/restore
+
+Payments:
+
+• POST /api/v1/webhooks/payment/:provider
+
+Account:
+
+• GET /api/v1/account/profile
+• GET /api/v1/account/usage
+• GET /api/v1/account/payment-history
+
+Administration:
+
+• GET /api/v1/admin/dashboard
+• POST /api/v1/admin/catalog
+• PATCH /api/v1/admin/catalog/:id
+• POST /api/v1/admin/catalog/sync
+• GET /api/v1/admin/sync-logs
+• POST /api/v1/admin/licensing-records
+• GET /api/v1/admin/subscriptions
+
+These are example routes, not a requirement to expose every operation publicly. Implement proper authentication, authorization, schema validation, pagination, rate limiting, safe error handling, and audit logging.
+
+Do not expose administrator endpoints to ordinary users.
+
+14. SECURITY REQUIREMENTS
+
+Implement:
+
+• Secure password hashing using a suitable maintained password-hashing algorithm.
+• Short-lived access tokens and appropriately protected refresh tokens.
+• Server-side authorization on every protected operation.
+• Rate limits for authentication, checkout, playback-session creation, and webhooks.
+• Input validation and output encoding.
+• SQL injection protection through parameterized database operations.
+• CORS restrictions appropriate to the production deployment.
+• HTTPS in production.
+• CSRF protection where cookie-based authentication is used.
+• Request-size limits.
+• Secure file-upload validation.
+• Malware scanning where appropriate for uploaded files.
+• Signed, time-limited playback access for first-party media.
+• Payment-webhook signature validation.
+• Idempotency for payments and membership changes.
+• Secret scanning.
+• Dependency vulnerability checks.
+• Structured logs without passwords, payment secrets, or access tokens.
+• Backup and restoration documentation.
+• A responsible vulnerability-reporting process.
+
+Never hardcode production credentials or include real customer data in test fixtures.
+
+15. OPEN-SOURCE LICENSING
+
+Use a clearly documented open-source license compatible with the project and its dependencies.
+
+Before selecting the license:
+
+• Explain the difference between permissive and copyleft licenses.
+• Verify dependency license compatibility.
+• Document third-party notices.
+• Separate application source code from copyrighted video content and proprietary provider assets.
+• State clearly that open-source application code does not grant rights to redistribute third-party media.
+• Do not include copyrighted videos, commercial artwork, or proprietary SDKs unless their licenses permit the intended use.
+
+Include:
+
+• LICENSE
+• README.md
+• CONTRIBUTING.md
+• CODE_OF_CONDUCT.md
+• SECURITY.md
+• PRIVACY.md
+• TERMS.md
+• COPYRIGHT_AND_TAKEDOWN.md
+• THIRD_PARTY_NOTICES.md
+• CHANGELOG.md
+
+Use accurate statements about what is open source and what requires separate licenses.
+
+16. GITHUB REPOSITORY AND CODESPACES
+
+Create a clean repository structure, for example:
+
+dramahub-open/
+android/
+backend/
+admin/
+shared/
+infrastructure/
+database/
+docs/
+scripts/
+tests/
+.github/
+workflows/
+ISSUE_TEMPLATE/
+PULL_REQUEST_TEMPLATE.md
+.devcontainer/
+devcontainer.json
+docker-compose.yml
+.env.example
+.gitignore
+LICENSE
+README.md
+CONTRIBUTING.md
+SECURITY.md
+
+Configure GitHub Codespaces for development only.
+
+The Codespaces environment should:
+
+• Install the required development tools.
+• Support backend and database development.
+• Document Android SDK and APK build options.
+• Provide safe example environment variables.
+• Run automated tests and code checks.
+• Avoid using Codespaces as a commercial production host or media-delivery service.
+• Avoid downloading or redistributing copyrighted videos during setup.
+• Never expose credentials in repository files, build logs, or screenshots.
+
+Do not commit generated secrets, keystores, private signing keys, database dumps, customer information, or large copyrighted media files.
+
+17. TESTING AND QUALITY CONTROL
+
+Write and run real tests.
+
+Backend:
+
+• Authentication and authorization tests.
+• Catalog filtering and pagination tests.
+• Daily usage calculations.
+• Timezone and midnight rollover tests.
+• Membership entitlement tests.
+• Payment webhook signature tests.
+• Duplicate payment event tests.
+• Failed and refunded payment tests.
+• Expired license tests.
+• Provider synchronization and retry tests.
+• Account deletion and data-retention tests.
+
+Android:
+
+• Screen navigation tests.
+• Login and logout tests.
+• Plan selection tests.
+• Playback-state tests.
+• Daily usage display tests.
+• Expired membership tests.
+• Network failure handling.
+• Accessibility checks.
+• Tests for unsupported external providers.
+
+Integration:
+
+• Database migrations.
+• API-to-database flows.
+• Checkout sandbox flows.
+• Webhook-to-subscription activation.
+• Authorized media playback.
+• End-to-end free and paid entitlement checks.
+
+Use mocked payment providers and openly licensed test videos in automated tests. Never create fake production transactions.
+
+Do not claim tests passed unless they actually ran and passed.
+
+18. CONTINUOUS INTEGRATION
+
+Create GitHub Actions workflows for:
+
+• Backend linting and type checks.
+• Backend unit and integration tests.
+• Android compilation and tests.
+• Dependency vulnerability scanning.
+• Secret scanning where available.
+• License inventory checks.
+• Build artifact generation.
+• Release validation.
+
+Pin dependencies and third-party actions appropriately, use minimal workflow permissions, and avoid exposing secrets to untrusted pull requests.
+
+Generate an APK as a build artifact when the required Android SDK and build dependencies are available.
+
+A successful CI build does not automatically mean the application is ready for public production deployment.
+
+19. DEPLOYMENT AND PUBLICATION
+
+Prepare complete instructions for:
+
+1. Opening the repository in GitHub Codespaces.
+2. Installing development dependencies.
+3. Configuring environment variables.
+4. Starting the local database.
+5. Applying migrations.
+6. Starting the backend.
+7. Starting the admin dashboard.
+8. Building the Android application.
+9. Running tests.
+10. Creating a signed release APK or Android App Bundle.
+11. Configuring a production database.
+12. Deploying the backend and background workers to suitable hosting.
+13. Configuring HTTPS, storage, and authorized media delivery.
+14. Registering and verifying the payment merchant account.
+15. Configuring payment webhooks.
+16. Creating the first administrator securely.
+17. Registering licensed content and provider integrations.
+18. Publishing source code and release notes on GitHub.
+19. Monitoring costs, errors, uptime, and payment failures.
+20. Preparing for Google Play submission if desired.
+
+Never place production credentials in GitHub Codespaces secrets when they are not required, and never treat a development preview URL as a permanent production URL.
+
+Do not claim an app has been published, a payment gateway is live, or a production server is running unless the relevant operation actually succeeded.
+
+20. UI/UX DESIGN
+
+Create a modern entertainment experience with:
+
+• A dark cinematic theme.
+• High-quality authorized posters.
+• Vertical drama cards.
+• Smooth transitions.
+• A bottom navigation bar.
+• Home, Discover, Search, Watchlist, and Profile screens.
+• Clear membership badges.
+• A daily viewing progress indicator.
+• A professional plan-comparison screen.
+• A readable checkout confirmation screen.
+• Accessible font sizes and contrast.
+• Loading skeletons and useful error states.
+• Responsive layouts for different Android screen sizes.
+
+Do not copy the distinctive UI, logo, or branding of Quick TV, Kuku TV, Story TV, or another existing application.
+
+21. PERFORMANCE AND RELIABILITY
+
+• Use pagination for large catalogs.
+• Cache permitted metadata.
+• Avoid downloading full videos into memory.
+• Stream media using authorized delivery mechanisms.
+• Support adaptive streaming where available.
+• Handle slow networks and interruptions.
+• Resume playback where supported.
+• Use bounded retries and exponential backoff for transient errors.
+• Avoid duplicate background jobs.
+• Monitor database and storage usage.
+• Provide health-check endpoints.
+• Document backup schedules and recovery procedures.
+• Make synchronization and payment processing safe to retry.
+
+22. DEFINITION OF DONE
+
+The project is not complete merely because files have been generated.
+
+Before declaring completion, verify that:
+
+• The Android application compiles.
+• The backend starts successfully.
+• Database migrations run successfully.
+• Authentication works.
+• Catalog browsing and search work.
+• At least one authorized media source works end to end.
+• The free daily limit is enforced server-side.
+• All four paid plans are configurable.
+• Payment sandbox verification works.
+• Failed payments do not activate subscriptions.
+• Duplicate webhooks do not duplicate subscriptions.
+• Membership expiration and cancellation work.
+• The ad-free entitlement is enforced for first-party app-controlled ads.
+• Daily catalog synchronization runs in the configured environment.
+• Expired content licenses prevent unauthorized playback.
+• Automated tests actually pass.
+• Documentation matches the implementation.
+• No secrets are committed.
+• No unauthorized copyrighted streams are included.
+• The Android build artifact is generated when the environment supports it.
+• Deployment steps have been tested or explicitly marked as unverified.
+
+Report any missing credentials, unavailable provider APIs, unverified licenses, required paid services, or incomplete production steps honestly.
+
+23. YOUR EXECUTION INSTRUCTIONS
+
+Work in the repository instead of responding with a plan alone.
+
+First inspect the existing repository and its files. Preserve useful existing work. If the repository is empty, initialize the project.
+
+Then execute the following phases:
+
+Phase 1: Architecture, licensing review, threat model, and repository setup.
+
+Phase 2: Database schema, migrations, backend configuration, and authentication.
+
+Phase 3: Catalog APIs, licensed provider adapters, and catalog synchronization.
+
+Phase 4: Android UI, navigation, search, and catalog integration.
+
+Phase 5: Authorized video playback and server-side daily usage enforcement.
+
+Phase 6: Membership plans, checkout, payment verification, and entitlement management.
+
+Phase 7: Administration dashboard, licensing records, and copyright complaints.
+
+Phase 8: Automated tests, security checks, accessibility, and performance fixes.
+
+Phase 9: CI workflows, build artifacts, deployment documentation, and release preparation.
+
+At the end of every phase:
+
+• Run relevant tests and checks.
+• Fix failures before continuing where practical.
+• Record completed work and remaining issues.
+• Keep documentation up to date.
+
+If a credential, license, or external account is unavailable, build the corresponding integration interface and sandbox tests, clearly document what is missing, and continue with the rest of the project.
+
+Do not replace real implementation with TODO comments, fake success messages, mock production data, or hardcoded payment confirmations.
+
+Do not stop after generating the folder structure. Continue until the available development environment has a tested, working implementation, and clearly distinguish verified results from steps that require external accounts or production deployment.
+
+Final objective: Deliver a maintainable, open-source Android streaming and discovery platform that can legally earn revenue through affordable subscriptions, provides a one-hour daily free tier, offers configurable Basic, Pro, Premium, and Ultra plans, automatically updates its authorized catalog, and can be built and maintained through GitHub without misusing GitHub Codespaces or infringing third-party content rights.
